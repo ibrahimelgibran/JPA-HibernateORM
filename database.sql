@@ -25,6 +25,10 @@ SELECT * FROM customers;
 ALTER TABLE customers
 ADD COLUMN primary_email VARCHAR(150);
 
+# TAMBAH COLUMN TYPE ENUM
+ALTER TABLE customers
+ADD COLUMN type VARCHAR(50);
+
 # ====== CATEGORIES ========== #
 CREATE TABLE categories
 (
@@ -35,10 +39,10 @@ CREATE TABLE categories
 
 SELECT * FROM categories;
 
-# ALTER  TABLE  categories
-# DROP COLUMN age;
+#TAMBAH DATE AND TIME
+ALTER  TABLE  categories
+ADD COLUMN create_at TIMESTAMP;
 
-# ALTER  TABLE  categories
-#    DROP COLUMN married;
-
+ALTER  TABLE  categories
+ADD COLUMN update_at TIMESTAMP;
 
