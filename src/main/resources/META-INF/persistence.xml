@@ -10,10 +10,11 @@
 
         <!-- Entity Classes -->
         <class>iegcode.jpa.entity.Customer</class>
-        <class>iegcode.jpa.entity.CustomerType</class>
         <class>iegcode.jpa.entity.Category</class>
         <class>iegcode.jpa.entity.Image</class>
         <class>iegcode.jpa.entity.Member</class>
+        <class>iegcode.jpa.entity.Department</class>
+
 
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
