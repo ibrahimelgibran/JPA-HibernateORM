@@ -67,15 +67,15 @@ SELECT *
 FROM images;
 
 # ====== MEMBERS ========== #
-    CREATE TABLE members
-    (
-        id          INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
-        email       VARCHAR(150) NOT NULL,
-        title       VARCHAR(100),
-        first_name  VARCHAR(100),
-        middel_name VARCHAR(100),
-        last_name   VARCHAR(100)
-    ) ENGINE InnoDB;
+CREATE TABLE members
+(
+    id          INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    email       VARCHAR(150) NOT NULL,
+    title       VARCHAR(100),
+    first_name  VARCHAR(100),
+    middel_name VARCHAR(100),
+    last_name   VARCHAR(100)
+) ENGINE InnoDB;
 
 ALTER TABLE members
     CHANGE COLUMN middel_name middle_name VARCHAR(100);
@@ -104,37 +104,41 @@ CREATE TABLE departments
     PRIMARY KEY (company_id, department_id)
 ) ENGINE InnoDB;
 
-SELECT * FROM departments;
+SELECT *
+FROM departments;
 
 # ====== HOBBIES ========== #
 CREATE TABLE hobbies
 (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-    member_id INT NOT NULL ,
-    name VARCHAR(150) NOT NULL ,
-    FOREIGN KEY fk_member_hobbies(member_id) REFERENCES members (id)
-)ENGINE InnoDB;
+    id        INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    member_id INT          NOT NULL,
+    name      VARCHAR(150) NOT NULL,
+    FOREIGN KEY fk_member_hobbies (member_id) REFERENCES members (id)
+) ENGINE InnoDB;
 
-DELETE FROM hobbies;
+DELETE
+FROM hobbies;
 
 ALTER TABLE hobbies
-AUTO_INCREMENT = 1;
+    AUTO_INCREMENT = 1;
 
-SELECT * FROM hobbies;
+SELECT *
+FROM hobbies;
 
 # ====== SKILL ========== #
 
 CREATE TABLE skills
 (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-    member_id INT NOT NULL ,
-    name VARCHAR(100) NOT NULL ,
-    value INT NOT NULL ,
-    FOREIGN KEY fk_members_skills (member_id) REFERENCES members(id),
+    id        INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    member_id INT          NOT NULL,
+    name      VARCHAR(100) NOT NULL,
+    value     INT          NOT NULL,
+    FOREIGN KEY fk_members_skills (member_id) REFERENCES members (id),
     CONSTRAINT skills_unique UNIQUE (member_id, name)
 ) ENGINE InnoDB;
 
-SELECT * FROM skills;
+SELECT *
+FROM skills;
 
 # ====== CREDENTIALS ========== #
 CREATE TABLE credentials
@@ -146,9 +150,11 @@ CREATE TABLE credentials
 
 DROP TABLE users;
 
-DELETE FROM users;
+DELETE
+FROM users;
 
-SELECT * FROM credentials;
+SELECT *
+FROM credentials;
 
 # ====== USER ========== #
 CREATE TABLE users
@@ -157,16 +163,52 @@ CREATE TABLE users
     name VARCHAR(150) NOT NULL
 ) ENGINE InnoDB;
 
-SELECT * FROM users;
+SELECT *
+FROM users;
 
 # ====== WALLET ========== #
 CREATE TABLE wallet
 (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-    user_id VARCHAR(100) NOT NULL ,
-    balance BIGINT NOT NULL ,
-    FOREIGN KEY fk_users_wallet (user_id) REFERENCES users(id)
+    id      INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user_id VARCHAR(100) NOT NULL,
+    balance BIGINT       NOT NULL,
+    FOREIGN KEY fk_users_wallet (user_id) REFERENCES users (id)
 ) ENGINE InnoDB;
 
 DROP TABLE wallet;
-SELECT * FROM wallet;
+SELECT *
+FROM wallet;
+
+# ====== BRAND ========== #
+CREATE TABLE brands
+(
+    id          VARCHAR(100) NOT NULL PRIMARY KEY,
+    name        VARCHAR(100),
+    description VARCHAR(500)
+) ENGINE InnoDB;
+
+SELECT *
+FROM brands;
+# ====== PRODUCTS ========== #
+CREATE TABLE products
+(
+    id          VARCHAR(100) NOT NULL PRIMARY KEY,
+    brand_id    VARCHAR(100) NOT NULL,
+    name        VARCHAR(100) NOT NULL,
+    price       BIGINT       NOT NULL,
+    description VARCHAR(500),
+    FOREIGN KEY fk_brands_products (brand_id) REFERENCES brands (id)
+) ENGINE InnoDB;
+
+DROP TABLE products;
+
+-- Mengubah tipe data kolom dari INT menjadi VARCHAR
+ALTER TABLE products
+MODIFY id VARCHAR(100);
+
+
+ALTER TABLE products
+    ADD COLUMN price BIGINT;
+
+SELECT *
+FROM products;
