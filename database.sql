@@ -67,15 +67,15 @@ SELECT *
 FROM images;
 
 # ====== MEMBERS ========== #
-CREATE TABLE members
-(
-    id          INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    email       VARCHAR(150) NOT NULL,
-    title       VARCHAR(100),
-    first_name  VARCHAR(100),
-    middel_name VARCHAR(100),
-    last_name   VARCHAR(100)
-) ENGINE InnoDB;
+    CREATE TABLE members
+    (
+        id          INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        email       VARCHAR(150) NOT NULL,
+        title       VARCHAR(100),
+        first_name  VARCHAR(100),
+        middel_name VARCHAR(100),
+        last_name   VARCHAR(100)
+    ) ENGINE InnoDB;
 
 ALTER TABLE members
     CHANGE COLUMN middel_name middle_name VARCHAR(100);
@@ -121,3 +121,17 @@ ALTER TABLE hobbies
 AUTO_INCREMENT = 1;
 
 SELECT * FROM hobbies;
+
+# ====== SKILL ========== #
+
+CREATE TABLE skills
+(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+    member_id INT NOT NULL ,
+    name VARCHAR(100) NOT NULL ,
+    value INT NOT NULL ,
+    FOREIGN KEY fk_members_skills (member_id) REFERENCES members(id),
+    CONSTRAINT skills_unique UNIQUE (member_id, name)
+) ENGINE InnoDB;
+
+SELECT * FROM skills;
