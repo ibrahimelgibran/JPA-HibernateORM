@@ -202,7 +202,7 @@ CREATE TABLE products
 
 DROP TABLE products;
 
--- Mengubah tipe data kolom dari INT menjadi VARCHAR
+-- Mengubah tipe data kolom dari INT menjadi VARCHAR s
 ALTER TABLE products
 MODIFY id VARCHAR(100);
 
