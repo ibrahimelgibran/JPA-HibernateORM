@@ -19,6 +19,17 @@ public class User {
     )
     private Credential credential;
 
+    @OneToOne(mappedBy = "user")
+    private Wallet wallet;
+
+    public Wallet getWallet() {
+        return wallet;
+    }
+
+    public void setWallet(Wallet wallet) {
+        this.wallet = wallet;
+    }
+
     public String getId() {
         return id;
     }

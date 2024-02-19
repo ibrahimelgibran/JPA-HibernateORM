@@ -3,6 +3,7 @@ package iegcode.jpa;
 import iegcode.jpa.entity.Credential;
 import iegcode.jpa.entity.Customer;
 import iegcode.jpa.entity.User;
+import iegcode.jpa.entity.Wallet;
 import iegcode.jpa.util.JpaUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -41,9 +42,29 @@ public class EntityRelationshipTest {
 
         User user = entityManager.find(User.class, "Gibran");
         Assertions.assertNotNull(user.getCredential());
+        Assertions.assertNotNull(user.getWallet());
 
         Assertions.assertEquals("gibran@example.com", user.getCredential().getEmail());
         Assertions.assertEquals("rahasia", user.getCredential().getPassword());
+        Assertions.assertEquals(1_000_000, user.getWallet().getBalance());
+
+        entityTransaction.commit();
+        entityManager.close();
+    }
+
+    @Test
+    void oneToOneJoinColumn() {
+        EntityManagerFactory entityManagerFactory = JpaUtil.getEntityManagerFactory();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
+
+        User user = entityManager.find(User.class, "Gibran");
+
+        Wallet wallet = new Wallet();
+        wallet.setUser(user);
+        wallet.setBalance(1_000_000L);
+        entityManager.persist(wallet);
 
         entityTransaction.commit();
         entityManager.close();

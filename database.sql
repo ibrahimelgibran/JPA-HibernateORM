@@ -158,3 +158,15 @@ CREATE TABLE users
 ) ENGINE InnoDB;
 
 SELECT * FROM users;
+
+# ====== WALLET ========== #
+CREATE TABLE wallet
+(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+    user_id VARCHAR(100) NOT NULL ,
+    balance BIGINT NOT NULL ,
+    FOREIGN KEY fk_users_wallet (user_id) REFERENCES users(id)
+) ENGINE InnoDB;
+
+DROP TABLE wallet;
+SELECT * FROM wallet;
