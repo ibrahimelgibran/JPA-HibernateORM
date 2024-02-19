@@ -105,3 +105,19 @@ CREATE TABLE departments
 ) ENGINE InnoDB;
 
 SELECT * FROM departments;
+
+# ====== HOBBIES ========== #
+CREATE TABLE hobbies
+(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+    member_id INT NOT NULL ,
+    name VARCHAR(150) NOT NULL ,
+    FOREIGN KEY fk_member_hobbies(member_id) REFERENCES members (id)
+)ENGINE InnoDB;
+
+DELETE FROM hobbies;
+
+ALTER TABLE hobbies
+AUTO_INCREMENT = 1;
+
+SELECT * FROM hobbies;
