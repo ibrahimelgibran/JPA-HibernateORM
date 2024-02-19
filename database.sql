@@ -46,7 +46,7 @@ ADD COLUMN create_at TIMESTAMP;
 ALTER  TABLE  categories
 ADD COLUMN update_at TIMESTAMP;
 
-# ====== CATEGORIES ========== #
+# ====== IMAGES ========== #
 CREATE TABLE images
 (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
@@ -59,3 +59,27 @@ DELETE FROM images;
 DROP TABLE images;
 
 SELECT * FROM images;
+
+# ====== MEMBERS ========== #
+CREATE TABLE members
+(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+    email VARCHAR(150) NOT NULL ,
+    title VARCHAR(100),
+    first_name VARCHAR(100),
+    middel_name VARCHAR(100),
+    last_name VARCHAR(100)
+) ENGINE InnoDB;
+
+ALTER TABLE members
+CHANGE COLUMN middel_name middle_name VARCHAR(100);
+# delete value per index
+DELETE FROM members WHERE id = 4;
+# mengembalikan ke index 1 lagi
+ALTER TABLE members AUTO_INCREMENT = 1;
+
+
+DELETE FROM members;
+DROP TABLE members;
+
+SELECT * FROM members;
