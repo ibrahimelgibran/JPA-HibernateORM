@@ -135,3 +135,26 @@ CREATE TABLE skills
 ) ENGINE InnoDB;
 
 SELECT * FROM skills;
+
+# ====== CREDENTIALS ========== #
+CREATE TABLE credentials
+(
+    id       VARCHAR(100) NOT NULL PRIMARY KEY,
+    email    VARCHAR(150) NOT NULL,
+    password VARCHAR(150) NOT NULL
+) ENGINE InnoDB;
+
+DROP TABLE users;
+
+DELETE FROM users;
+
+SELECT * FROM credentials;
+
+# ====== USER ========== #
+CREATE TABLE users
+(
+    id   VARCHAR(100) NOT NULL PRIMARY KEY,
+    name VARCHAR(150) NOT NULL
+) ENGINE InnoDB;
+
+SELECT * FROM users;

@@ -1,5 +1,6 @@
 package iegcode.jpa.entity;
 
+import iegcode.jpa.listener.UpdateAtListener;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -7,7 +8,10 @@ import java.util.Calendar;
 
 @Entity
 @Table(name = "categories")
-public class Category {
+@EntityListeners({
+    UpdateAtListener.class
+})
+public class Category implements UpdateAtAware{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY )
