@@ -26,4 +26,24 @@ public class ColumnTest {
         entityTransaction.commit();
         entityManager.close();;
     }
+
+    @Test
+    void Transient() {
+        EntityManagerFactory entityManagerFactory = JpaUtil.getEntityManagerFactory();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
+
+        Customer customer = new Customer();
+        customer.setId("4");
+        customer.setName("Gibran");
+        customer.setPrimaryEmail("elgibran@exemple.com");
+        customer.setFullName("Ibrahim El Gibran");
+
+        entityManager.persist(customer);
+
+        entityTransaction.commit();
+        entityManager.close();;
+    }
 }
+

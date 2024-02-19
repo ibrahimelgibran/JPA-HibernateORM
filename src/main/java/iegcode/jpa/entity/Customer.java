@@ -19,13 +19,23 @@ public class Customer {
     private Boolean married;
 
     private Byte age;
+    @Enumerated(EnumType.STRING)
+    private CustomerType type;
+
+    @Transient // untuk meng ignore full name hilang saat di test tapi ada
+    private String fullName;
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
 
     public Boolean getMarried() {
         return married;
     }
-
-    @Enumerated(EnumType.STRING)
-    private CustomerType type;
 
     public CustomerType getType() {
         return type;
