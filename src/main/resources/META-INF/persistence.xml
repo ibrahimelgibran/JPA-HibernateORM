@@ -22,6 +22,9 @@
         <class>iegcode.jpa.entity.Employee</class>
         <class>iegcode.jpa.entity.Manager</class>
         <class>iegcode.jpa.entity.VicePresident</class>
+        <class>iegcode.jpa.entity.Payment</class>
+        <class>iegcode.jpa.entity.PaymentGopay</class>
+        <class>iegcode.jpa.entity.PaymentCreditCard</class>
 
 
         <properties>

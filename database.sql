@@ -236,3 +236,35 @@ CREATE TABLE employees
 ) ENGINE InnoDB;
 
 SELECT * FROM employees;
+
+# ====== PAYMENTS ========== #
+
+CREATE TABLE payments
+(
+    id     VARCHAR(100) NOT NULL PRIMARY KEY,
+    amount BIGINT       NOT NULL
+) ENGINE InnoDB;
+
+SELECT * FROM payments;
+DROP TABLE payments;
+
+# ====== PAYMENTS GOPAY ========== #
+CREATE TABLE payments_gopay
+(
+    id       VARCHAR(100) NOT NULL PRIMARY KEY,
+    gopay_id VARCHAR(100) NOT NULL,
+    FOREIGN KEY fk_payments_gopay (id) REFERENCES payments (id)
+) ENGINE InnoDB;
+
+SELECT * FROM payments_gopay;
+
+# ====== PAYMENET CREDIT CARD ========== #
+CREATE TABLE payments_credit_card
+(
+    id          VARCHAR(100) NOT NULL PRIMARY KEY,
+    masked_card VARCHAR(100) NOT NULL,
+    bank        VARCHAR(100) NOT NULL,
+    FOREIGN KEY fk_payments_credit_card (id) REFERENCES payments (id)
+) ENGINE InnoDB;
+
+SELECT * FROM payments_credit_card;
