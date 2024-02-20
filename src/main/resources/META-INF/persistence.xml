@@ -18,6 +18,10 @@
         <class>iegcode.jpa.entity.Credential</class>
         <class>iegcode.jpa.entity.Wallet</class>
         <class>iegcode.jpa.entity.Brand</class>
+        <class>iegcode.jpa.entity.Department</class>
+        <class>iegcode.jpa.entity.Employee</class>
+        <class>iegcode.jpa.entity.Manager</class>
+        <class>iegcode.jpa.entity.VicePresident</class>
 
 
         <properties>

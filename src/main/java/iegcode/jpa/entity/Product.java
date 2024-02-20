@@ -2,6 +2,8 @@ package iegcode.jpa.entity;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "products")
 public class Product {
@@ -15,9 +17,20 @@ public class Product {
 
     private Long price;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "brand_id", referencedColumnName = "id")
     private Brand brand;
+
+    @ManyToMany(mappedBy = "likes")
+    private Set<User> likeBy;
+
+    public Set<User> getLikeBy() {
+        return likeBy;
+    }
+
+    public void setLikeBy(Set<User> likeBy) {
+        this.likeBy = likeBy;
+    }
 
     public String getId() {
         return id;
