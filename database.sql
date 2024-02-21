@@ -300,3 +300,5 @@ CREATE TABLE transactions_debit
 )ENGINE InnoDB;
 
 SELECT * FROM transactions_debit;
+
+#a
