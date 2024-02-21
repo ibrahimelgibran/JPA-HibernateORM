@@ -8,6 +8,8 @@ import jakarta.persistence.EntityTransaction;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
+
 public class InheritanceTest {
 
     @Test
@@ -92,5 +94,35 @@ public class InheritanceTest {
         entityManager.close();
     }
 
+    @Test
+    void tablePerClassInsert() {
+        EntityManagerFactory entityManagerFactory = JpaUtil.getEntityManagerFactory();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
+
+        Transaction transaction = new Transaction();
+        transaction.setId("t1");
+        transaction.setCreateAt(LocalDateTime.now());
+        transaction.setBalance(1_000_000L);
+        entityManager.persist(transaction);
+
+        TransactionDebit debitTransaction = new TransactionDebit();
+        debitTransaction.setId("t2");
+        debitTransaction.setCreateAt(LocalDateTime.now());
+        debitTransaction.setBalance(2_000_000L);
+        debitTransaction.setDebitAmount(1_000_000L);
+        entityManager.persist(debitTransaction);
+
+        TransactionCredit creditTransaction = new TransactionCredit();
+        creditTransaction.setId("t3");
+        creditTransaction.setCreateAt(LocalDateTime.now());
+        creditTransaction.setBalance(1_000_000L);
+        creditTransaction.setCreditAmount(1_000_000L);
+        entityManager.persist(creditTransaction);
+
+        entityTransaction.commit();
+        entityManager.close();
+    }
 
 }

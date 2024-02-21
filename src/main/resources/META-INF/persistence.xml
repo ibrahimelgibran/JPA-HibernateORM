@@ -25,6 +25,9 @@
         <class>iegcode.jpa.entity.Payment</class>
         <class>iegcode.jpa.entity.PaymentGopay</class>
         <class>iegcode.jpa.entity.PaymentCreditCard</class>
+        <class>iegcode.jpa.entity.Transaction</class>
+        <class>iegcode.jpa.entity.TransactionCredit</class>
+        <class>iegcode.jpa.entity.TransactionDebit</class>
 
 
         <properties>

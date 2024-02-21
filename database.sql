@@ -268,3 +268,35 @@ CREATE TABLE payments_credit_card
 ) ENGINE InnoDB;
 
 SELECT * FROM payments_credit_card;
+
+# ====== TRANSACTION ========== #
+CREATE TABLE transactions
+(
+    id VARCHAR(100) NOT NULL PRIMARY KEY ,
+    balance BIGINT NOT NULL ,
+    created_at TIMESTAMP NOT NULL
+)ENGINE InnoDB;
+
+SELECT * FROM transactions;
+
+# ====== TRANSACTION CREDIT ========== #
+CREATE TABLE transactions_credit
+(
+    id VARCHAR(100) NOT NULL PRIMARY KEY ,
+    balance BIGINT NOT NULL ,
+    created_at TIMESTAMP NOT NULL ,
+    credit_amount BIGINT NOT NULL
+)ENGINE InnoDB;
+
+SELECT * FROM transactions_credit;
+
+# ====== TRANSACTION DEBIT ========== #
+CREATE TABLE transactions_debit
+(
+    id VARCHAR(100) NOT NULL PRIMARY KEY ,
+    balance BIGINT NOT NULL ,
+    created_at TIMESTAMP NOT NULL ,
+    debit_amount BIGINT NOT NULL
+)ENGINE InnoDB;
+
+SELECT * FROM transactions_debit;
