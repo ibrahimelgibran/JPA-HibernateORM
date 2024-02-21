@@ -301,4 +301,3 @@ CREATE TABLE transactions_debit
 
 SELECT * FROM transactions_debit;
 
-#asasas
