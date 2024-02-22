@@ -1,14 +1,8 @@
 package iegcode.jpa;
 
-import iegcode.jpa.entity.Brand;
-import iegcode.jpa.entity.Member;
-import iegcode.jpa.entity.Product;
-import iegcode.jpa.entity.User;
+import iegcode.jpa.entity.*;
 import iegcode.jpa.util.JpaUtil;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.TypedQuery;
+import jakarta.persistence.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -147,6 +141,45 @@ public class JpaQueryLanguageTest {
         for (Brand brand : brands){
             System.out.println(brand.getId());
         }
+
+        entityTransaction.commit();
+        entityManager.close();
+    }
+
+    @Test
+    void namedQuery() {
+        EntityManagerFactory entityManagerFactory = JpaUtil.getEntityManagerFactory();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
+
+        TypedQuery<Brand> query = entityManager.createNamedQuery("Brand.findAllByName", Brand.class);
+        query.setParameter("name", "Xiaomi");
+
+        List<Brand> brands = query.getResultList();
+        for (Brand brand : brands){
+            System.out.println(brand.getName());
+        }
+
+        entityTransaction.commit();
+        entityManager.close();
+    }
+
+    @Test
+    void selectNewConstructor() {
+        EntityManagerFactory entityManagerFactory = JpaUtil.getEntityManagerFactory();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
+
+        TypedQuery<SimpleBrand> query = entityManager.createQuery("select new iegcode.jpa.entity.SimpleBrand(b.id, b.name)" + "from Brand b where b.name = :name", SimpleBrand.class);query.setParameter("name", "Xiaomi");
+        query.setParameter("name", "Xiaomi");
+
+        List<SimpleBrand> simpleBrands = query.getResultList();
+        for (SimpleBrand simpleBrand : simpleBrands){
+            System.out.println(simpleBrand.getId() + " : " + simpleBrand.getName());
+        }
+
 
         entityTransaction.commit();
         entityManager.close();
