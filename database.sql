@@ -313,5 +313,13 @@ ADD COLUMN version BIGINT;
 
 DELETE FROM brands WHERE id = 'apple';
 
-
 SELECT * FROM brands;
+
+# ====== ADD NEW DATA INSERT INTO PRODUCT  ========== #
+SELECT * FROM products;
+
+INSERT INTO products(id, brand_id, name, price, description)
+VALUE ('p3', 'xiaomi', 'Xiaomi 1', 2000000, 'Barang New' );
+
+INSERT INTO products(id, brand_id, name, price, description)
+    VALUE ('p4', 'xiaomi', 'Xiaomi 2', 1000000, 'Barang New' )
