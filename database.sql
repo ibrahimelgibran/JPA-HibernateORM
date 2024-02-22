@@ -311,4 +311,7 @@ ADD COLUMN updated_at TIMESTAMP;
 ALTER TABLE brands
 ADD COLUMN version BIGINT;
 
+DELETE FROM brands WHERE id = 'apple';
+
+
 SELECT * FROM brands;
