@@ -14,6 +14,9 @@ public class Brand extends AuditableEntity<String>{
     @OneToMany(mappedBy = "brand")
     private List<Product> products;
 
+    @Version
+    private Long version;
+
     public String getName() {
         return name;
     }
