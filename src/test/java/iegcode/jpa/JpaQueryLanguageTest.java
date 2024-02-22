@@ -22,10 +22,10 @@ public class JpaQueryLanguageTest {
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
 
-        TypedQuery <Brand> query = entityManager.createQuery("select b from Brand b", Brand.class);
+        TypedQuery<Brand> query = entityManager.createQuery("select b from Brand b", Brand.class);
         List<Brand> brands = query.getResultList();
 
-        for (Brand brand : brands){
+        for (Brand brand : brands) {
             System.out.println(brand.getId() + " : " + brand.getName());
         }
 
@@ -47,7 +47,7 @@ public class JpaQueryLanguageTest {
         query.setParameter("lastName", "Haura");
 
         List<Member> members = query.getResultList();
-        for (Member member : members){
+        for (Member member : members) {
             System.out.println(member.getId() + " : " + member.getFullname());
         }
 
@@ -66,7 +66,7 @@ public class JpaQueryLanguageTest {
         query.setParameter("brand", "Samsung");
 
         List<Product> products = query.getResultList();
-        for (Product product : products){
+        for (Product product : products) {
             System.out.println(product.getId() + " : " + product.getName() + " : " + product.getBrand().getName());
         }
 
@@ -85,9 +85,9 @@ public class JpaQueryLanguageTest {
         query.setParameter("product", "Samsung");
 
         List<User> users = query.getResultList();
-        for (User user : users){
+        for (User user : users) {
             System.out.println("User: " + user.getName());
-            for (Product product : user.getLikes()){
+            for (Product product : user.getLikes()) {
                 System.out.println("Product: " + product.getName());
             }
         }
@@ -105,8 +105,47 @@ public class JpaQueryLanguageTest {
 
         TypedQuery<Brand> query = entityManager.createQuery("select b from Brand b order by b.name desc ", Brand.class);
         List<Brand> brands = query.getResultList();
-        for (Brand brand : brands){
+        for (Brand brand : brands) {
             System.out.println(brand.getName());
+        }
+
+        entityTransaction.commit();
+        entityManager.close();
+    }
+
+    @Test
+    void insertRandomBrand() {
+        EntityManagerFactory entityManagerFactory = JpaUtil.getEntityManagerFactory();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
+
+        for (int i = 0; i <20; i++) {
+            Brand brand = new Brand();
+            brand.setId(String.valueOf(i));
+            brand.setName("Brand " + i);
+            entityManager.persist(brand);
+        }
+
+
+        entityTransaction.commit();
+        entityManager.close();
+    }
+
+    @Test
+    void listOffset() {
+        EntityManagerFactory entityManagerFactory = JpaUtil.getEntityManagerFactory();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
+
+        TypedQuery<Brand> query = entityManager.createQuery("select b from Brand b order by b.id", Brand.class);
+        query.setFirstResult(10);
+        query.setMaxResults(10);
+
+        List<Brand> brands = query.getResultList();
+        for (Brand brand : brands){
+            System.out.println(brand.getId());
         }
 
         entityTransaction.commit();
