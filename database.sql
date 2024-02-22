@@ -301,3 +301,11 @@ CREATE TABLE transactions_debit
 
 SELECT * FROM transactions_debit;
 
+# ====== ADD COLUMN BRAND , CREATED AND UPDATED ========== #
+ALTER TABLE brands
+ADD COLUMN created_at TIMESTAMP;
+
+ALTER TABLE brands
+ADD COLUMN updated_at TIMESTAMP;
+
+SELECT * FROM brands;
